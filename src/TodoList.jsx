@@ -1,21 +1,29 @@
 import React from 'react';
 
 const TodoList = ({
-    todoList
+  todos,
+  toggleTodo,
+  deleteTodo
 }) => {
-    return (
-        <div className="TodoList">
-            <ul>
-                {
-                    todoList.map(t => (
-                        <li>
-                            {t.content}
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
-    )
+  return (
+    <div className="TodoList">
+      <ul>
+        {
+          todos.map((t, i) => (
+            <li key={i}>
+              <input 
+                type='checkbox' 
+                onClick={e => toggleTodo(i)}
+                checked={t.completed ? 'checked' : ''} 
+              />
+              {t.content}
+              <button onClick={e => deleteTodo(i)}>Delete</button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  )
 }
 
 export default TodoList;

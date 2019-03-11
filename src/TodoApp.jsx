@@ -1,18 +1,37 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import TodoList from './TodoList';
+import TodoForm from './TodoForm';
+import TodoFooter from './TodoFooter';
 
 const TodoApp = () => {
-    const [todoList, setTodoList] = useState([]);
+  const [todos, setTodos] = useState([]);
 
-    return (
-        <div className="TodoApp">
-            <TodoList
-                list={todoList} 
-            /> 
-        </div>
-    );
+  const saveTodo = value => {
+    setTodos([...todos].concat({
+      content: value,
+      completed: false
+    }));
+  };
+
+  const toggleTodo = idx => {
+  };
+
+  const deleteTodo = idx => {
+    setTodos(todos.filter((v,i) => i !== idx));
+  };
+
+  return (
+    <div className="TodoApp">
+      <TodoForm saveTodo={saveTodo}/>
+      <TodoList
+        todos={todos} 
+        toggleTodo={toggleTodo}
+        deleteTodo={deleteTodo}
+      /> 
+      <TodoFooter />
+    </div>
+  );
 }
 
 export default TodoApp;
